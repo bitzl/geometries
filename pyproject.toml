@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "geometries"
+version = "0.1.0"
+description = ""
+authors = ["Marcus Bitzl <marcus@bitzl.io>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pydantic = "^2.6.4"
+
+
+[tool.poetry.group.dev.dependencies]
+sympy = "^1.12"
+black = "^24.3.0"
+marimo = "^0.3.8"
+matplotlib = "^3.8.3"
+polars = "^0.20.17"
+jupyter = "^1.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
