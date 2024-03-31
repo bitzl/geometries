@@ -10,6 +10,9 @@ class Card(BaseModel):
 
     def __str__(self) -> str:
         return f"Card({self.width}×{self.height})"
+    
+    def __lt__(self, other: 'Card') -> bool:
+        return self.width * self.height < other.width * other.height
 
 
 spielkarte = Card(width=60, height=90)
