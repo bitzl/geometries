@@ -9,17 +9,26 @@ from geometries.paper import Paper
 class Fitting(BaseModel):
     model_config = ConfigDict(frozen=True)
 
-    columns: float = Field(ge=0)
-    rows: float = Field(ge=0)
-    cards_per_page: int = Field(ge=0)
+    fractional_columns: float = Field(ge=0)
+    fractional_rows: float = Field(ge=0)
 
     @classmethod
     def create(cls: Self, card: Card, paper: Paper, distance: float = 0) -> Self:
         columns = (distance + paper.width) / (card.width + distance)
         rows = (distance + paper.height) / (card.height + distance)
-        cards_per_page = floor(columns) * floor(rows)
         return cls(
-            columns=columns,
-            rows=rows,
-            cards_per_page=cards_per_page,
+            fractional_columns=columns,
+            fractional_rows=rows,
         )
+
+    @property
+    def columns(self) -> int:
+        return floor(self.fractional_columns)
+
+    @property
+    def rows(self) -> int:
+        return floor(self.fractional_rows)
+
+    @property
+    def cards_per_sheet(self) -> int:
+        return self.columns * self.rows
